@@ -1,0 +1,37 @@
+
+//PPT 13장 - 예제 13-1
+
+//page 14쪽
+
+
+//각자 다른게 두개를 만들어서
+//각각 getId() + ":" +n을 출력해서
+//스레드가 실행되고 그러는것을 봐보자.
+
+//무한루프로 하지 말고  while(n <= 30) 인 경우로 설정하자
+
+public class TimerRunnable extends Thread{
+	int n = 0;
+	
+	public void run() {
+		while(n<=30)
+		{
+			System.out.println(getId() + ":" + n +"\n");
+			
+			n++;
+			
+			try {
+				sleep(1000);
+			}
+			
+			catch(InterruptedException e) {return;};
+		}
+	}
+	
+	public static void main(String[] args) {
+		TimerRunnable th1 = new TimerRunnable();
+		TimerRunnable th2 = new TimerRunnable();
+		th1.start();
+		th2.start();
+	}
+}
